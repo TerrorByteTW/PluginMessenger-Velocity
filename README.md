@@ -1,6 +1,6 @@
 ## Plugin Messenger - Velocity
 
-This plugin was written for my [Velocity plugin development tutorial series](https://www.youtube.com/playlist?list=PL51GdsaNM19JlY0t6KNyi4vtkC5Q-4-F4) and designed to be paired with the Plugin Messenger - Paper plugin.
+This plugin was written for my [Velocity plugin development tutorial series](https://www.youtube.com/playlist?list=PL51GdsaNM19JlY0t6KNyi4vtkC5Q-4-F4) and designed to be paired with the [Plugin Messenger - Paper](https://github.com/TerrorByteTW/PluginMessenger-Paper) plugin.
 Plugin messaging has been around since Minecraft 1.1, which was released in 2012, over 11 years ago!
 
 This plugin is extremely simple, it only listens for a "RequestCreeper" message on the `demo:main` channel, and replies to all servers with a "SpawnCreeper" message. The paper plugin handles the rest
