@@ -8,11 +8,13 @@ import com.velocitypowered.api.event.Subscribe;
 import com.velocitypowered.api.event.connection.PluginMessageEvent;
 import com.velocitypowered.api.event.proxy.ProxyInitializeEvent;
 import com.velocitypowered.api.plugin.Plugin;
+import com.velocitypowered.api.proxy.Player;
 import com.velocitypowered.api.proxy.ProxyServer;
 import com.velocitypowered.api.proxy.ServerConnection;
 import com.velocitypowered.api.proxy.messages.MinecraftChannelIdentifier;
-import com.velocitypowered.api.proxy.server.RegisteredServer;
 import org.slf4j.Logger;
+
+import java.util.Optional;
 
 @Plugin(
 		id = "pluginmessaging",
@@ -49,11 +51,12 @@ public class PluginMessaging {
 
 		String subchannel = in.readUTF();
 		if (subchannel.equals("RequestCreeper")) {
-			for (RegisteredServer server : proxy.getAllServers()) {
+			for (Player player : proxy.getAllPlayers()) {
 				ByteArrayDataOutput out = ByteStreams.newDataOutput();
 				out.writeUTF("SpawnCreeper");
 
-				server.sendPluginMessage(IDENTIFIER, out.toByteArray());
+				Optional<ServerConnection> connection = player.getCurrentServer();
+				connection.ifPresent(serverConnection -> serverConnection.sendPluginMessage(IDENTIFIER, out.toByteArray()));
 			}
 
 			this.logger.info("Sending message to all servers to summon a creeper near all players");
